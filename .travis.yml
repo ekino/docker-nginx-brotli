@@ -1,7 +1,14 @@
-language: generic
+sudo: required
+dist: trusty
+language: python
 
 services:
   - docker
 
+matrix:
+  include:
+    - env: NGINX_VERSION=1.12.2 BROTLI_VERSION=bfd2885
+    - env: NGINX_VERSION=1.13.9 BROTLI_VERSION=bfd2885
+
 script:
-  - docker build -t nginx-brotli .
+    - travis_wait python travis.py
